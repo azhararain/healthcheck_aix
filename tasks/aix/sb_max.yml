@@ -1,0 +1,12 @@
+      - name: no -a sb_max
+        shell:
+          cmd: no -a | awk '/sb_max/ && !/{{var_sb_max}}/ {print $1,$3}'
+        register: command_output      
+        when: ansible_distribution == 'AIX'
+        changed_when: False
+        tags: sb_max
+
+      - debug: 
+          var=command_output.stdout_lines
+        when: command_output.stdout_lines
+        tags: sb_max

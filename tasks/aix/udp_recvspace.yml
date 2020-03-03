@@ -1,0 +1,12 @@
+      - name: no -a udp_recvspace
+        shell:
+          cmd: no -a | awk '/udp_recvspace/ && !/{{var_udp_recvspace}}/ {print $1,$3}'
+        register: command_output      
+        when: ansible_distribution == 'AIX'
+        changed_when: False
+        tags: udp_recvspace
+
+      - debug: 
+          var=command_output.stdout_lines
+        when: command_output.stdout_lines
+        tags: udp_recvspace

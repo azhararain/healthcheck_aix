@@ -1,0 +1,36 @@
+---
+# tasks file for ./healthcheck_aixvios
+## AIX Tasks
+  - import_tasks: aix/fc_err_recov.yml
+  - import_tasks: aix/dyntrk.yml
+  - import_tasks: aix/queue_depth.yml
+  - import_tasks: aix/reserve_policy.yml
+  - import_tasks: aix/hcheck_interval.yml
+  - import_tasks: aix/mtu_bypass.yml
+  - import_tasks: aix/min_buf_tiny.yml
+  - import_tasks: aix/max_buf_tiny.yml
+  - import_tasks: aix/min_buf_small.yml
+  - import_tasks: aix/max_buf_small.yml
+  - import_tasks: aix/min_buf_medium.yml
+  - import_tasks: aix/max_buf_medium.yml
+  - import_tasks: aix/min_buf_large.yml
+  - import_tasks: aix/max_buf_large.yml
+  - import_tasks: aix/min_buf_huge.yml
+  - import_tasks: aix/max_buf_huge.yml
+  - import_tasks: aix/sys0.yml
+  - import_tasks: aix/limits_fsize.yml
+  - import_tasks: aix/limits_core.yml
+  - import_tasks: aix/limits_cpu.yml
+  - import_tasks: aix/limits_data.yml
+  - import_tasks: aix/limits_rss.yml
+  - import_tasks: aix/limits_stack.yml
+  - import_tasks: aix/limits_nofiles.yml
+  - import_tasks: aix/ipqmaxlen.yml
+  - import_tasks: aix/rfc1323.yml
+  - import_tasks: aix/sb_max.yml
+  - import_tasks: aix/tcp_recvspace.yml
+  - import_tasks: aix/tcp_sendspace.yml
+  - import_tasks: aix/udp_recvspace.yml
+  - import_tasks: aix/udp_sendspace.yml
+  - import_tasks: aix/vscsi_err_recov.yml
+  - import_tasks: aix/vscsi_path_to.yml

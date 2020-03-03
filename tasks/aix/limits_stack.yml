@@ -1,0 +1,12 @@
+      - name: AIX ulimits for default stack /etc/security/limits
+        shell:
+          cmd: awk '/default:/ {flag=1; next} flag && /stack/ && !/{{var_limits_stack}}/ {print $1,$3; exit}' /etc/security/limits
+        register: command_output      
+        when: ansible_distribution == 'AIX'
+        changed_when: False
+        tags: limits_stack
+
+      - debug: 
+          var=command_output.stdout_lines
+        when: command_output.stdout_lines
+        tags: limits_stack
