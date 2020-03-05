@@ -1,6 +1,8 @@
       - name: Network max_buf_large
         shell:
-          cmd: lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/ent/ { if (flag == "0" ) {tmpent=$1; flag=1}} flag && /max_buf_large/ && !/{{var_max_buf_large}}/ {print tmpent,$1,$2; flag=0}'
+          cmd: |
+            set -o pipefail
+            lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/ent/ { if (flag == "0" ) {tmpent=$1; flag=1}} flag && /max_buf_large/ && !/{{var_max_buf_large}}/ {print tmpent,$1,$2; flag=0}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

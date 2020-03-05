@@ -1,6 +1,8 @@
       - name: no -a rfc1323
         shell:
-          cmd: no -a | awk '/rfc1323/ && !/{{var_rfc1323}}/ {print $1,$3}'
+          cmd: |
+            set -o pipefail
+            no -a | awk '/rfc1323/ && !/{{var_rfc1323}}/ {print $1,$3}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

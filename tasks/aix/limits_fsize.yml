@@ -1,6 +1,8 @@
       - name: AIX ulimits for default fsize /etc/security/limits
         shell:
-          cmd: awk '/default:/ {flag=1; next} flag && /fsize/ && !/{{var_limits_fsize}}/ {print $1,$3; exit}' /etc/security/limits
+          cmd: |
+            set -o pipefail
+            awk '/default:/ {flag=1; next} flag && /fsize/ && !/{{var_limits_fsize}}/ {print $1,$3; exit}' /etc/security/limits
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

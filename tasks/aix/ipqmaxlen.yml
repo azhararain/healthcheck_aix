@@ -1,6 +1,8 @@
       - name: no -a ipqmaxlen
         shell:
-          cmd: no -a | awk '/ipqmaxlen/ && !/{{var_ipqmaxlen}}/ {print $1,$3}'
+          cmd: |
+            set -o pipefail
+            no -a | awk '/ipqmaxlen/ && !/{{var_ipqmaxlen}}/ {print $1,$3}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

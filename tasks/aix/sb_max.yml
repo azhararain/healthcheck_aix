@@ -1,6 +1,8 @@
       - name: no -a sb_max
         shell:
-          cmd: no -a | awk '/sb_max/ && !/{{var_sb_max}}/ {print $1,$3}'
+          cmd: |
+            set -o pipefail
+            no -a | awk '/sb_max/ && !/{{var_sb_max}}/ {print $1,$3}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False
