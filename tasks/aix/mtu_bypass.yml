@@ -2,7 +2,7 @@
         shell:
           cmd: |
             set -o pipefail
-            lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | sed 's/t//g' | xargs -I % sh -c '{ echo %; lsattr -El %; }'  | awk '/en/ { if (flag == "0" ) {tmpent=$1; flag=1}} flag && /mtu_bypass/ && !/{{var_mtu_bypass}}/ {print tmpent,$1,$2; flag=0}'
+            lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | sed 's/t//g' | xargs -I % sh -c '{ echo %; lsattr -El %; }'  | awk '/en/ { if (flag == "0" ) {tmpent=$1; flag=1}} flag && /mtu_bypass/ && !/{{ var_mtu_bypass }}/ {print tmpent,$1,$2; flag=0}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

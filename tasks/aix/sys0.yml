@@ -2,7 +2,7 @@
         shell:
           cmd: |
             set -o pipefail
-            lsattr -El sys0 | awk '/maxuproc/ && !/{{var_sys0}}/ {print "sys0",$2}'
+            lsattr -El sys0 | awk '/maxuproc/ && !/{{ var_sys0 }}/ {print "sys0",$2}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False

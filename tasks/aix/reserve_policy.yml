@@ -3,7 +3,7 @@
           chdir: /dev
           cmd: |
             set -o pipefail
-            ls hdisk* | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/hdisk/ {tmphdisk=$1; flag=1; next} flag && /reserve_policy/ && !/{{var_reserve_policy}}/ {print tmphdisk,$1,$2; flag=0}'
+            ls hdisk* | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/hdisk/ {tmphdisk=$1; flag=1; next} flag && /reserve_policy/ && !/{{ var_reserve_policy }}/ {print tmphdisk,$1,$2; flag=0}'
         register: command_output      
         when: ansible_distribution == 'AIX'
         changed_when: False
