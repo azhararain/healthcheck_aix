@@ -4,12 +4,12 @@
           cmd: |
             set -o pipefail
             ls fscsi* | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/fscsi/ {tmpfscsi=$1; flag=1; next} flag && /fc_err_recov/ && !/{{ var_fc_err_recov }}/ {print tmpfscsi,$1,$2; flag=0}'
-        register: command_output      
+        register: command_output
         when: ansible_distribution == 'AIX'
         changed_when: False
         tags: fc_err_recov
 
-      - debug: 
+      - debug:
           var=command_output.stdout_lines
         when: command_output.stdout_lines
         tags: fc_err_recov

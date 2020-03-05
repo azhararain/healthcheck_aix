@@ -3,12 +3,12 @@
           cmd: |
             set -o pipefail
             lsattr -El sys0 | awk '/maxuproc/ && !/{{ var_sys0 }}/ {print "sys0",$2}'
-        register: command_output      
+        register: command_output
         when: ansible_distribution == 'AIX'
         changed_when: False
         tags: sys0
 
-      - debug: 
+      - debug:
           var=command_output.stdout_lines
         when: command_output.stdout_lines
         tags: sys0

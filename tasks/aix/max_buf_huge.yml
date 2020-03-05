@@ -2,13 +2,13 @@
         shell:
           cmd: |
             set -o pipefail
-            lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/ent/ { if (flag == "0" ) {tmpent=$1; flag=1}} flag && /max_buf_huge/ && !/{{ var_max_buf_huge }}/ {print tmpent,$1,$2; flag=0}'
-        register: command_output      
+            lsdev | grep "Virtual I/O Ethernet Adapter" | awk '{print $1}' | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/ent/ { if (flag == "0" ) {tmpent=$1; flag=1 }} flag && /max_buf_huge/ && !/{{ var_max_buf_huge }}/ {print tmpent,$1,$2; flag=0}'
+        register: command_output
         when: ansible_distribution == 'AIX'
         changed_when: False
         tags: max_buf_huge
 
-      - debug: 
+      - debug:
           var=command_output.stdout_lines
         when: command_output.stdout_lines
         tags: max_buf_huge

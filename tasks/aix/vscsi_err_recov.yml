@@ -3,13 +3,13 @@
           chdir: /dev
           cmd: |
             set -o pipefail
-            ls vscsi* | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/vscsi/ { if (flag == "0" ) {tmpvscsi=$1; flag=1}} flag && /vscsi_err_recov/ && !/{{ var_vscsi_err_recov }}/ {print tmpvscsi,$1,$2; flag=0}'
-        register: command_output      
+            ls vscsi* | xargs -I % sh -c '{ echo %; lsattr -El %; }' | awk '/vscsi/ { if (flag == "0" ) {tmpvscsi=$1; flag=1 }} flag && /vscsi_err_recov/ && !/{{ var_vscsi_err_recov }}/ {print tmpvscsi,$1,$2; flag=0}'
+        register: command_output
         when: ansible_distribution == 'AIX'
         changed_when: False
         tags: vscsi_err_recov
 
-      - debug: 
+      - debug:
           var=command_output.stdout_lines
         when: command_output.stdout_lines
         tags: vscsi_err_recov
