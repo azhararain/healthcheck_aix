@@ -11,5 +11,5 @@
 
       - debug:
           var=command_output.stdout_lines
-        when: command_output.stdout_lines
+        when: ansible_distribution == 'AIX' and command_output.stdout_lines
         tags: vscsi_path_to
